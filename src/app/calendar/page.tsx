@@ -21,12 +21,15 @@ async function getData() {
 
 
 export default async function Calendar() {
+  console.log('start fetch days data')
   let events: Array<Event> = [];
   try {
     events = await getData();
+    console.log('success fetch days data')
   } catch (e) {
-    console.log('could not receive logs', e)
+    console.log('error fetch days data', e)
   }
+  console.log('end fetch days data')
   const groupedEvents = groupBy(events, event => event.date)
   return <CalendarPage>
     {Object.keys(groupedEvents).map((date) => (
