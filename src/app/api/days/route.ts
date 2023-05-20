@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import generateBlocks from '@/app/utils/generateBlocks';
+import generateBlocks from '@/utils/generateBlocks';
 
 export async function GET() {
   const blocks = generateBlocks();

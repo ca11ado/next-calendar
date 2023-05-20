@@ -1,5 +1,5 @@
-import CalendarPage from "../components/CalendarPage";
-import { Block } from "../utils/generateBlocks";
+import CalendarPage from "@/components/CalendarPage";
+import { Block } from "@/utils/generateBlocks";
 
 async function getData() {
   const res = await fetch(`${process.env.BASE_URL}/api/days`);
