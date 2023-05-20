@@ -18,7 +18,12 @@ async function getData() {
 
 
 export default async function Calendar() {
-  const blocks = await getData();
+  let blocks: Array<Block> = [];
+  try {
+    const blocks = await getData();
+  } catch (e) {
+    console.log(e)
+  }
   return <CalendarPage>{blocks.map((block: Block) => (
     <div key={block.id}>{block.day}</div>
   ))}</CalendarPage>
