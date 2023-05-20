@@ -1,4 +1,6 @@
-import React, { ReactNode } from 'react';
+'use client'
+
+import React, { ReactNode, useState } from 'react';
 
 interface EventProps {
   children: ReactNode;
@@ -6,6 +8,16 @@ interface EventProps {
 }
 
 const Event: React.FC<EventProps> = ({ children, color }) => {
+  const [isTooltipVisible, setTooltipVisible] = useState(false);
+
+  const handleMouseEnter = () => {
+    setTooltipVisible(true);
+  };
+
+  const handleMouseLeave = () => {
+    setTooltipVisible(false);
+  };
+
   return (
     <div
       className="mb-4 text-xs truncate"
@@ -13,7 +25,18 @@ const Event: React.FC<EventProps> = ({ children, color }) => {
         backgroundColor: color,
         height: '1rem',
       }}
-    ><span className='inline-block max-w-full overflow-hidden'>{children}</span></div>
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <span className="inline-block max-w-full overflow-hidden">
+        {children}
+      </span>
+      {isTooltipVisible && (
+        <div className="absolute z-10 p-2 bg-black text-white text-sm whitespace-nowrap">
+          {children}
+        </div>
+      )}
+    </div>
   );
 };
 
