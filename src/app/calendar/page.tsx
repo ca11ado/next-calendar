@@ -2,14 +2,15 @@ import CalendarPage from "@/components/CalendarPage";
 import { Block } from "@/utils/generateBlocks";
 
 async function getData() {
-  const res = await fetch(`${process.env.BASE_URL}/api/days`);
+  const url = `${process.env.BASE_URL}/api/days`;
+  const res = await fetch(url);
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 
   // Recommendation: handle errors
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data');
+    throw new Error(`Failed to fetch data: ${url}`);
   }
 
   return res.json();
