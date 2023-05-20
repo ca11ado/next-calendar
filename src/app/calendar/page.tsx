@@ -1,5 +1,8 @@
 import CalendarPage from "@/components/CalendarPage";
-import { Block } from "@/utils/generateBlocks";
+import Card from "@/components/Card";
+import { Event } from "@/types/Event";
+import Events from "@/components/Events";
+import groupBy from 'lodash/groupBy';
 
 async function getData() {
   const url = `${process.env.BASE_URL}/api/days`;
@@ -18,13 +21,18 @@ async function getData() {
 
 
 export default async function Calendar() {
-  let blocks: Array<Block> = [];
+  let events: Array<Event> = [];
   try {
-    blocks = await getData();
+    events = await getData();
   } catch (e) {
     console.log('could not receive logs', e)
   }
-  return <CalendarPage>{blocks.map((block: Block) => (
-    <div key={block.id}>{block.day}</div>
-  ))}</CalendarPage>
+  const groupedEvents = groupBy(events, event => event.date)
+  return <CalendarPage>
+    {Object.keys(groupedEvents).map((date) => (
+      <Card key={date}>
+        <Events events={groupedEvents[date]} />
+      </Card>
+    ))}
+  </CalendarPage>
 }

@@ -1,12 +1,14 @@
 import { format, getDaysInMonth } from 'date-fns';
+import generateEvents from './getRandomEvents';
+import { Event } from '@/types/Event';
 
 export interface Block {
   id: string;
-  day: number;
+  events: Array<Event>;
   formattedDate: string;
 }
 
-const generateBlocks = (): Block[] => {
+const generateMockedDays = (): Block[] => {
   const currentDate = new Date();
   const daysInMonth = getDaysInMonth(currentDate);
 
@@ -15,7 +17,7 @@ const generateBlocks = (): Block[] => {
     const formattedDate = format(new Date(currentDate.getFullYear(), currentDate.getMonth(), day), 'yyyy-MM-dd');
     return {
       id: `block-${day}`,
-      day,
+      events: generateEvents(day),
       formattedDate,
     };
   });
@@ -23,4 +25,4 @@ const generateBlocks = (): Block[] => {
   return blocks;
 };
 
-export default generateBlocks;
+export default generateMockedDays;
