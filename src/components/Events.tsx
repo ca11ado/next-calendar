@@ -25,7 +25,7 @@ const Events: React.FC<EventProps> = ({ events }) => {
               backgroundColor: color,
               height: '1rem',
             }}
-          ></div>
+          >{event.name}</div>
         );
       })}
     </>
