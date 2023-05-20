@@ -1,5 +1,6 @@
 import React from 'react';
 import { Event } from '@/types/Event';
+import EventComponent from '@/components/Event';
 
 interface EventProps {
   events: Event[];
@@ -17,16 +18,7 @@ const Events: React.FC<EventProps> = ({ events }) => {
         }
         usedColors.push(color);
 
-        return (
-          <div
-            key={event.id}
-            className="mb-4"
-            style={{
-              backgroundColor: color,
-              height: '1rem',
-            }}
-          >{event.name}</div>
-        );
+        return <EventComponent key={event.id} color={color}>{event.name}</EventComponent>;
       })}
     </>
   );
