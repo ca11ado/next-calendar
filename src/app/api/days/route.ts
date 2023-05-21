@@ -7,6 +7,6 @@ export async function GET() {
     return NextResponse.json(events || []);
   } catch (error) {
     console.error("Failed to get value from Edge Config:", error);
-    return NextResponse.error();
+    return NextResponse.json([]);
   }
 }
