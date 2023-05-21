@@ -5,7 +5,7 @@ import Events from "@/components/Events";
 import groupBy from "lodash/groupBy";
 
 async function getData() {
-  const url = `${process.env.BASE_URL}/api/days`;
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/days`;
   const res = await fetch(url);
   if (!res.ok) {
     throw new Error(`Failed to fetch data: ${url}`);
