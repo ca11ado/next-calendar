@@ -1,16 +1,12 @@
-import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { NextResponse } from "next/server";
+import { get } from "@vercel/edge-config";
 
 export async function GET() {
-  const filePath = path.join(process.cwd(), 'src/utils/mockedEvents.json');
-
   try {
-    const fileContents = fs.readFileSync(filePath, 'utf-8');
-    const data = JSON.parse(fileContents);
-    return NextResponse.json(data.events);
+    const events = await get("events");
+    return NextResponse.json(events);
   } catch (error) {
-    console.error('Failed to read file:', error);
+    console.error("Failed to get value from Edge Config:", error);
     return NextResponse.error();
   }
 }
