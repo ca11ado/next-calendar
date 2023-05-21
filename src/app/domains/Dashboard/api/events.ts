@@ -1,8 +1,5 @@
 import { Event } from "@/types/Event";
-
-const URL_ITEM = `${process.env.EDGE_API_URL}/${process.env.EDGE_CONFIG_ID}/item`;
-const URL_ITEMS = `${process.env.EDGE_API_URL}/${process.env.EDGE_CONFIG_ID}/items`;
-const EVENTS_KEY = "events";
+import { URL_ITEM, URL_ITEMS, EVENTS_KEY } from "@/config";
 
 export const getEventItem = async () => {
   try {
