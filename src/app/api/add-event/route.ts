@@ -1,15 +1,9 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 import sanitizeHtml from "sanitize-html";
 import { nanoid } from "nanoid";
-import { getItems } from "@/components/Dashboard/api/addItem";
-import { getUser } from "@/components/Dashboard/api/checkAuth";
-
-type Event = {
-  id: string;
-  name: string;
-  description: string;
-};
+import { addItems, getEventItem } from "@/app/domains/Dashboard/api/events";
+import { getUser } from "@/app/domains/Dashboard/api/checkAuth";
+import { Event } from "@/types/Event";
 
 type EventData = Exclude<Event, "id">;
 
@@ -20,6 +14,7 @@ const generateId = (): string => {
 };
 
 const prepareEvent = (eventData: EventData): Event => {
+  // TODO check for valid data, time and etc...
   const sanitizedData = sanitizeEventData(eventData); // Фильтрация данных с помощью sanitizeHtml
 
   // Ваша логика для сохранения события в базе данных
@@ -41,23 +36,23 @@ const sanitizeEventData = (eventData: EventData): EventData => {
   };
 };
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
-  // TODO check authorization!!! Common module with all methods
+export async function POST(request: Request) {
   const user = await getUser();
 
   if (!user) {
     return NextResponse.json({}, { status: 401 });
   }
 
-  const eventData: Event = req.body;
+  const eventData = await request.json();
 
-  const items = await getItems();
-  console.log(">>>>>", items);
+  const items = await getEventItem();
 
   // Вызов функции для добавления события в базу данных
   let event;
   try {
     event = prepareEvent(eventData);
+    await addItems([event]);
+    console.log("event", event);
   } catch (e) {
     console.log("Something wrong with event", e);
     return NextResponse.json({}, { status: 400 });
