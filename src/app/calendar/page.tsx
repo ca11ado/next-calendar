@@ -1,23 +1,25 @@
+import { get } from "@vercel/edge-config";
 import CalendarPage from "@/components/CalendarPage";
 import Card from "@/components/Card";
 import { Event } from "@/types/Event";
 import Events from "@/components/Events";
 import groupBy from "lodash/groupBy";
+import { EVENTS_KEY } from "@/config";
 
-async function getData() {
-  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/days`;
-  const res = await fetch(url, { cache: "no-store" });
-  if (!res.ok) {
-    throw new Error(`Failed to fetch data: ${url}`);
+export async function getEvents() {
+  try {
+    const events = await get<Array<Event>>(EVENTS_KEY);
+    return events || [];
+  } catch (error) {
+    console.error("Failed to get value from Edge Config:", error);
+    return [];
   }
-
-  return res.json();
 }
 
 export default async function Calendar() {
   let events: Array<Event> = [];
   try {
-    events = await getData();
+    events = await getEvents();
   } catch (e) {
     console.log("error fetch days data", e);
   }
