@@ -6,7 +6,7 @@ import groupBy from "lodash/groupBy";
 
 async function getData() {
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/days`;
-  const res = await fetch(url);
+  const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) {
     throw new Error(`Failed to fetch data: ${url}`);
   }
@@ -21,7 +21,8 @@ export default async function Calendar() {
   } catch (e) {
     console.log("error fetch days data", e);
   }
-  const groupedEvents = groupBy(events, (event) => event.date);
+  const groupedEvents = groupBy(events, (event) => new Date(event.date));
+  console.log(groupedEvents);
   return (
     <CalendarPage>
       {Object.keys(groupedEvents).map((date) => (
