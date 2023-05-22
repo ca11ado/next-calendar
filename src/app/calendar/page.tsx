@@ -6,7 +6,9 @@ import Events from "@/components/Events";
 import groupBy from "lodash/groupBy";
 import { EVENTS_KEY } from "@/config";
 
-export async function getEvents() {
+export const dynamic = "force-dynamic";
+
+async function getEvents() {
   try {
     const events = await get<Array<Event>>(EVENTS_KEY);
     return events || [];
