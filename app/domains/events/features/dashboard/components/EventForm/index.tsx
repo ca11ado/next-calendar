@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, FormEvent } from "react";
 
 const EventForm: React.FC = () => {

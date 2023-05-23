@@ -1,10 +1,9 @@
-"use client";
 import React from "react";
 import Layout from "@/components/Layout";
 import EventForm from "@/domains/events/features/dashboard/components/EventForm";
 import List from "@/domains/events/features/dashboard/components/List";
 import { Event } from "@/domains/events/types/Event";
-import Card from "../../../calendar/components/Card";
+import Card from "@/domains/events/features/calendar/components/Card";
 
 interface DashboardPageProps {
   events: Array<Event>;
