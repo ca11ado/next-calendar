@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import sanitizeHtml from "sanitize-html";
 import { nanoid } from "nanoid";
-import { addItems, getEventItem } from "@/app/domains/Dashboard/api/events";
-import { getUser } from "@/app/domains/Dashboard/api/checkAuth";
-import { Event } from "@/app/types/Event";
+import { addItems, getEventItem } from "@/app/domains/dashboard/api/events";
+import { getUser } from "@/app/domains/dashboard/api/checkAuth";
+import { Event } from "@/app/domains/events/types/Event";
 
 type EventData = Exclude<Event, "id">;
 

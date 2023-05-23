@@ -1,5 +1,5 @@
-import Page from "@/app/domains/Dashboard/components/page";
-import { getUser } from "@/app/domains/Dashboard/api/checkAuth";
+import Page from "@/app/domains/dashboard/components/page";
+import { getUser } from "@/app/domains/dashboard/api/checkAuth";
 
 export const dynamic = "force-dynamic";
 
