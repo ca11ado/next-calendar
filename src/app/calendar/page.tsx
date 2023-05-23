@@ -13,8 +13,7 @@ async function getEvents() {
     const events = await get<Array<Event>>(EVENTS_KEY);
     return events || [];
   } catch (error) {
-    console.error("Failed to get value from Edge Config:", error);
-    return [];
+    throw error;
   }
 }
 
