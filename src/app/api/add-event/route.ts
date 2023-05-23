@@ -3,7 +3,7 @@ import sanitizeHtml from "sanitize-html";
 import { nanoid } from "nanoid";
 import { addItems, getEventItem } from "@/app/domains/Dashboard/api/events";
 import { getUser } from "@/app/domains/Dashboard/api/checkAuth";
-import { Event } from "@/types/Event";
+import { Event } from "@/app/types/Event";
 
 type EventData = Exclude<Event, "id">;
 

@@ -1,5 +1,5 @@
-import { Event } from "@/types/Event";
-import { URL_ITEM, URL_ITEMS, EVENTS_KEY } from "@/config";
+import { Event } from "@/app/types/Event";
+import { URL_ITEM, URL_ITEMS, EVENTS_KEY } from "@/app/config";
 
 export const getEventItem = async () => {
   try {

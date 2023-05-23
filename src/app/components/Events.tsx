@@ -1,6 +1,6 @@
-import React from 'react';
-import { Event } from '@/types/Event';
-import EventComponent from '@/components/Event';
+import React from "react";
+import { Event } from "@/app/types/Event";
+import EventComponent from "@/app/components/Event";
 
 interface EventProps {
   events: Event[];
@@ -18,14 +18,18 @@ const Events: React.FC<EventProps> = ({ events }) => {
         }
         usedColors.push(color);
 
-        return <EventComponent key={event.id} color={color}>{event.name}</EventComponent>;
+        return (
+          <EventComponent key={event.id} color={color}>
+            {event.name}
+          </EventComponent>
+        );
       })}
     </>
   );
 };
 
 function getRandomColor() {
-  const colors = ['#FFC0CB', '#FFD700', '#90EE90', '#87CEEB', '#BA55D3'];
+  const colors = ["#FFC0CB", "#FFD700", "#90EE90", "#87CEEB", "#BA55D3"];
   const randomIndex = Math.floor(Math.random() * colors.length);
   return colors[randomIndex];
 }

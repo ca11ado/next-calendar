@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Layout from "@/app/components/Layout";
-import EventForm from "@/components/EventForm";
+import EventForm from "@/app/components/EventForm";
 
 interface DashboardPageProps {}
 

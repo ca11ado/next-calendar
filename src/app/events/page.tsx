@@ -1,4 +1,4 @@
-import { eventsCalendar } from "@/utils/server/routes";
+import { eventsCalendar } from "@/app/utils/server/routes";
 import { redirect } from "next/navigation";
 
 export default async function Events() {
