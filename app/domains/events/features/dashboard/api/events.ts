@@ -1,5 +1,6 @@
 import { Event } from "@/domains/events/types/Event";
 import { URL_ITEM, URL_ITEMS, EVENTS_KEY } from "@/config";
+import { getEvents } from "@/domains/events/api/getEvents";
 
 export const getEventItem = async () => {
   try {
@@ -17,7 +18,7 @@ export const getEventItem = async () => {
 
 export const addItems = async (addedEvents: Array<Event>) => {
   try {
-    const items = await getEventItem();
+    const items = await getEvents();
     const addItems = await fetch(URL_ITEMS, {
       method: "PATCH",
       headers: {
@@ -29,13 +30,14 @@ export const addItems = async (addedEvents: Array<Event>) => {
           {
             operation: "update",
             key: EVENTS_KEY,
-            value: [...items.value, ...addedEvents],
+            value: [...items, ...addedEvents],
           },
         ],
       }),
     });
     const responseJSON = await addItems.json();
     if (!responseJSON.ok) {
+      console.log(responseJSON);
       throw new Error("somethiing wrong");
     }
     return responseJSON;
