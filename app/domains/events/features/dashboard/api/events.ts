@@ -35,12 +35,12 @@ export const addItems = async (addedEvents: Array<Event>) => {
         ],
       }),
     });
-    const responseJSON = await addItems.json();
+    const responseJSON = addItems;
     if (!responseJSON.ok) {
       console.log(responseJSON);
       throw new Error("somethiing wrong");
     }
-    return responseJSON;
+    return responseJSON.json();
   } catch (error) {
     console.log("[addItems]: ", error);
   }
