@@ -1,8 +1,11 @@
 import { NextResponse } from "next/server";
 import sanitizeHtml from "sanitize-html";
 import { nanoid } from "nanoid";
-import { addItems, getEventItem } from "@/domains/dashboard/api/events";
-import { getUser } from "@/domains/dashboard/api/checkAuth";
+import {
+  addItems,
+  getEventItem,
+} from "@/domains/events/features/dashboard/api/events";
+import { getUser } from "@/domains/events/features/dashboard/api/checkAuth";
 import { Event } from "@/domains/events/types/Event";
 
 type EventData = Exclude<Event, "id">;

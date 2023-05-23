@@ -1,8 +1,8 @@
 import { get } from "@vercel/edge-config";
-import CalendarPage from "@/domains/events/feautres/calendar/components/CalendarPage";
-import Card from "@/domains/events/feautres/calendar/components/Card";
+import CalendarPage from "@/domains/events/features/calendar/components/CalendarPage";
+import Card from "@/domains/events/features/calendar/components/Card";
 import { Event } from "@/domains/events/types/Event";
-import Events from "@/domains/events/feautres/calendar/components/Events";
+import Events from "@/domains/events/features/calendar/components/Events";
 import groupBy from "lodash/groupBy";
 import { EVENTS_KEY } from "@/config";
 

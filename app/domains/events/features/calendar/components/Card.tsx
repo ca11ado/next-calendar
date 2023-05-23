@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode } from "react";
 
 interface CardProps {
   children: ReactNode;
@@ -7,9 +7,7 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({ children }) => {
   return (
     <div className="p-4">
-      <div className="bg-white rounded shadow">
-        {children}
-      </div>
+      <div className="bg-white rounded shadow">{children}</div>
     </div>
   );
 };
