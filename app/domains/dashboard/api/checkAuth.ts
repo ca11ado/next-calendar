@@ -1,4 +1,4 @@
-import { User } from "@/app/domains/dashboard/types/User";
+import { User } from "@/domains/dashboard/types/User";
 import { get } from "@vercel/edge-config";
 import { cookies } from "next/headers";
 

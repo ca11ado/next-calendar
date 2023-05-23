@@ -1,6 +1,6 @@
 import React from "react";
-import { Event } from "@/app/domains/events/types/Event";
-import EventComponent from "@/app/domains/events/feautres/calendar/components/Event";
+import { Event } from "@/domains/events/types/Event";
+import EventComponent from "@/domains/events/feautres/calendar/components/Event";
 
 interface EventProps {
   events: Event[];

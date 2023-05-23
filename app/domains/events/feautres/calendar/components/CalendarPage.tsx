@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import Layout from "@/app/components/Layout";
+import Layout from "@/components/Layout";
 
 interface CalendarPageProps {
   children: ReactNode[];

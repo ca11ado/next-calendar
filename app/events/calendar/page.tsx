@@ -1,10 +1,10 @@
 import { get } from "@vercel/edge-config";
-import CalendarPage from "@/app/domains/events/feautres/calendar/components/CalendarPage";
-import Card from "@/app/domains/events/feautres/calendar/components/Card";
-import { Event } from "@/app/domains/events/types/Event";
-import Events from "@/app/domains/events/feautres/calendar/components/Events";
+import CalendarPage from "@/domains/events/feautres/calendar/components/CalendarPage";
+import Card from "@/domains/events/feautres/calendar/components/Card";
+import { Event } from "@/domains/events/types/Event";
+import Events from "@/domains/events/feautres/calendar/components/Events";
 import groupBy from "lodash/groupBy";
-import { EVENTS_KEY } from "@/app/config";
+import { EVENTS_KEY } from "@/config";
 
 export const dynamic = "force-dynamic";
 
