@@ -15,7 +15,6 @@ export default async function Calendar() {
     console.log("error fetch days data", e);
   }
   const groupedEvents = groupBy(events, (event) => new Date(event.date));
-  console.log(groupedEvents);
   return (
     <CalendarPage>
       {Object.keys(groupedEvents).map((date) => (
