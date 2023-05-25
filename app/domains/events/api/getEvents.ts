@@ -1,10 +1,12 @@
-import { get } from "@vercel/edge-config";
-import { EVENTS_KEY } from "@/config";
-import { Event } from "@/domains/events/types/Event";
+import { BASE_URL } from "@/config";
 
 export async function getEvents() {
   try {
-    const events = await get<Array<Event>>(EVENTS_KEY);
+    const response = await fetch(`${BASE_URL}/api/get-events-kv`);
+    if (!response.ok) {
+      throw new Error("Something wrong");
+    }
+    const { events } = await response.json();
     return events || [];
   } catch (error) {
     throw error;
