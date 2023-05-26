@@ -1,54 +1,13 @@
 import { NextResponse } from "next/server";
 import { kv } from "@vercel/kv";
-import sanitizeHtml from "sanitize-html";
-import { nanoid } from "nanoid";
 import { getUser } from "@/domains/events/features/dashboard/api/checkAuth";
-import { Event } from "@/domains/events/types/Event";
 import { EVENTS_KEY } from "@/config";
-import { REQUIRED_EVENT_KEYS } from "@/config";
 import { WrongClientData } from "@/domains/events/utils/errors";
-
-type EventData = Exclude<Event, "id">;
-
-const requiredKeys = REQUIRED_EVENT_KEYS;
-
-const generateId = (): string => {
-  return nanoid(20);
-};
-
-const prepareEvent = (eventData: EventData): Event => {
-  const sanitizedData = sanitizeEventData(eventData); // Фильтрация данных с помощью sanitizeHtml
-  const event = { ...sanitizedData, id: generateId() };
-  return event;
-};
-
-const sanitizeEventData = (eventData: EventData): EventData => {
-  // Фильтрация данных, чтобы удалить нежелательные символы или потенциально опасный код
-  const sanitizedName = sanitizeHtml(eventData.name);
-  const sanitizedDescription = sanitizeHtml(eventData.description);
-
-  return {
-    ...eventData,
-    name: sanitizedName,
-    description: sanitizedDescription,
-  };
-};
-
-const prepareEvents = (events: EventData[]): Event[] => {
-  return events.map(prepareEvent);
-};
-
-const areRequiredKeysPresented = (eventData: EventData): boolean => {
-  return requiredKeys.every((requiredKey) =>
-    Object.keys(eventData).some((eventKey) => eventKey === requiredKey)
-  );
-};
-
-const findEventWithMissingProperties = (
-  events: EventData[]
-): EventData | undefined => {
-  return events.find((event) => !areRequiredKeysPresented(event));
-};
+import {
+  findEventWithMissingProperties,
+  requiredKeys,
+  prepareEvents,
+} from "@/api/events/utils";
 
 export async function POST(request: Request) {
   const user = await getUser();
