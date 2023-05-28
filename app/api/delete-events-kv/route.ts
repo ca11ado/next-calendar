@@ -17,8 +17,8 @@ export async function POST(request: Request) {
     if (!ids) {
       throw new WrongClientData(`ids should be specified`);
     }
-    const events: Event[] = await kv.lrange(EVENTS_KEY, 0, -1);
-    const deletedEvents = events.filter((event) =>
+    const eventsInBD: Event[] = await kv.lrange(EVENTS_KEY, 0, -1);
+    const deletedEvents = eventsInBD.filter((event) =>
       ids.find((id: string) => event.id === id)
     );
     if (!deletedEvents.length) {
