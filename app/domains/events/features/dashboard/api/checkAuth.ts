@@ -10,7 +10,7 @@ export async function getUser() {
       rights: ["all"],
     },
   ];
-  const cookieToken = cookies().get("cl-token")?.value;
+  const cookieToken = cookies().get("cl_token")?.value;
   return !!(
     Array.isArray(tokens) && tokens.some((user) => user?.token === cookieToken)
   );

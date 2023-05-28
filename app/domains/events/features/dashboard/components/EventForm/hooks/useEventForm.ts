@@ -1,4 +1,5 @@
 import { useState, FormEvent } from "react";
+import { addItems } from "@/domains/events/features/dashboard/api/events";
 
 export const useEventForm = () => {
   const [name, setName] = useState("");
@@ -17,18 +18,9 @@ export const useEventForm = () => {
 
     // Отправка данных на сервер
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/add-event`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ name, description, date, time }),
-        }
-      );
+      const response = await addItems([{ name, description, date }]);
 
-      if (!response.ok) {
+      if (!response?.ok) {
         throw new Error("Failed to add event");
       }
 

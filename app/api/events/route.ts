@@ -1,12 +1,11 @@
 import { NextResponse } from "next/server";
 import { kv } from "@vercel/kv";
 import { EVENTS_KEY } from "@/config";
-import { Event } from "@/domains/events/types/Event";
+import { Event, EventData } from "@/domains/events/types/Event";
 import { handleRequestError } from "@/utils/server/handleRequestError";
 import { getUser } from "@/domains/events/features/dashboard/api/checkAuth";
 import { WrongClientData } from "@/domains/events/utils/errors";
 import {
-  EventData,
   findEventWithMissingProperties,
   prepareEvents,
   requiredKeys,

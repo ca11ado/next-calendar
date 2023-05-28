@@ -1,9 +1,8 @@
 import { nanoid } from "nanoid";
 import sanitizeHtml from "sanitize-html";
 import { REQUIRED_EVENT_KEYS } from "@/config";
-import { Event } from "@/domains/events/types/Event";
+import { Event, EventData } from "@/domains/events/types/Event";
 
-export type EventData = Exclude<Event, "id">;
 export const requiredKeys = REQUIRED_EVENT_KEYS;
 
 export const areRequiredKeysPresented = (eventData: EventData): boolean => {

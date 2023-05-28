@@ -1,6 +1,12 @@
 export interface Event {
   id: string;
-  date: Date;
+  date: string;
+  name: string;
+  description: string;
+}
+
+export interface EventData {
+  date: string;
   name: string;
   description: string;
 }

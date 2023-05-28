@@ -1,6 +1,5 @@
-import { Event } from "@/domains/events/types/Event";
-import { URL_ITEM, URL_ITEMS, EVENTS_KEY } from "@/config";
-import { getEvents } from "@/domains/events/api/getEvents";
+import { EventData } from "@/domains/events/types/Event";
+import { URL_ITEM, BASE_URL } from "@/config";
 
 export const getEventItem = async () => {
   try {
@@ -16,31 +15,18 @@ export const getEventItem = async () => {
   }
 };
 
-export const addItems = async (addedEvents: Array<Event>) => {
+export const addItems = async (addedEvents: EventData[]) => {
   try {
-    const items = await getEvents();
-    const addItems = await fetch(URL_ITEMS, {
-      method: "PATCH",
+    return fetch(`${BASE_URL}/api/events`, {
+      method: "POST",
       headers: {
-        Authorization: `Bearer ${process.env.EDGE_API_TOKEN}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        items: [
-          {
-            operation: "update",
-            key: EVENTS_KEY,
-            value: [...items, ...addedEvents],
-          },
-        ],
+        operation: "write",
+        events: addedEvents,
       }),
     });
-    const responseJSON = addItems;
-    if (!responseJSON.ok) {
-      console.log(responseJSON);
-      throw new Error("somethiing wrong");
-    }
-    return responseJSON.json();
   } catch (error) {
     console.log("[addItems]: ", error);
   }
