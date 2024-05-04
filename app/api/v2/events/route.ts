@@ -6,7 +6,6 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    console.log(">>> GET API");
     const loggedCustomer = await checkAuthUser();
     if (!loggedCustomer) {
       throw new WrongClientData("Not auth", 401);
