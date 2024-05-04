@@ -11,6 +11,7 @@ export async function checkAuthUser() {
     },
   ];
   const cookieToken = cookies().get("cl_token")?.value;
+  console.log(">>> cl_token", cookies());
   return !!(
     Array.isArray(tokens) && tokens.some((user) => user?.token === cookieToken)
   );

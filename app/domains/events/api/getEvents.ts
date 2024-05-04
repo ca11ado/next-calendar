@@ -2,7 +2,10 @@ import { BASE_URL } from "@/config";
 
 export async function getEvents() {
   try {
-    const response = await fetch(`${BASE_URL}/api/v2/events`);
+    const response = await fetch(`${BASE_URL}/api/v2/events`, {
+      method: "GET",
+      credentials: "include",
+    });
     if (!response.ok) {
       throw new Error("Something wrong");
     }
