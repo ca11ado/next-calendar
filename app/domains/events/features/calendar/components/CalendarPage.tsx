@@ -8,7 +8,7 @@ interface CalendarPageProps {
 const CalendarPage: React.FC<CalendarPageProps> = ({ children }) => {
   return (
     <Layout>
-      <div className="grid grid-cols-3 gap-4 md:grid-cols-5 lg:grid-cols-6">
+      <div className="h-screen w-screen p-4 flex flex-wrap overflow-hidden bg-gray-200">
         {children}
       </div>
     </Layout>
