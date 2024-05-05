@@ -2,14 +2,18 @@ import { BASE_URL } from "@/config";
 
 export async function getEvents() {
   try {
+    const headers = new Headers({
+      Authorization: `Bearer ${process.env.AUTH_TOKEN_ADMIN}`,
+    });
     const response = await fetch(`${BASE_URL}/api/v2/events`, {
       method: "GET",
-      credentials: "include",
+      headers,
     });
-    if (!response.ok) {
-      throw new Error("Something wrong");
+    const responseData = await response.json();
+    if (responseData?.error) {
+      throw new Error(`Something wrong: ${responseData.error}`);
     }
-    const { events } = await response.json();
+    const { data: events } = responseData;
     return events || [];
   } catch (error) {
     throw error;

@@ -1,5 +1,5 @@
 import { User } from "@/domains/events/features/dashboard/types/User";
-import { cookies } from "next/headers";
+import { headers } from "next/headers";
 
 export async function checkAuthUser() {
   const tokens: User[] = [
@@ -10,9 +10,10 @@ export async function checkAuthUser() {
       rights: ["all"],
     },
   ];
-  const cookieToken = cookies().get("cl_token")?.value;
-  console.log(">>> cl_token", cookies().getAll());
+  const authToken = headers().get("authorization");
   return !!(
-    Array.isArray(tokens) && tokens.some((user) => user?.token === cookieToken)
+    authToken &&
+    Array.isArray(tokens) &&
+    tokens.some((user) => authToken.includes(user.token))
   );
 }

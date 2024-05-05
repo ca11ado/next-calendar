@@ -12,9 +12,18 @@ export default async function Calendar() {
   try {
     events = await getEvents();
   } catch (e) {
-    console.log("error fetch days data", e);
+    console.log("Error fetch events data:", e);
   }
   const groupedEvents = groupBy(events, (event) => new Date(event.date));
+  return (
+    <Card key={1222}>
+      {events.map(({ id, name, description }) => (
+        <div key={id}>
+          {[id, name, description].filter(Boolean).join(" | ")}
+        </div>
+      ))}
+    </Card>
+  );
   return (
     <CalendarPage>
       {Object.keys(groupedEvents).map((date) => (
