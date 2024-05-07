@@ -5,8 +5,8 @@ import { calculateSquareSize } from "@/domains/events/utils/calculateSquareSize"
 
 interface SquaresGridProps {
   count: number;
-  width: string;
-  height: string;
+  width?: string;
+  height?: string;
 }
 
 const SquaresGrid: React.FC<SquaresGridProps> = ({
