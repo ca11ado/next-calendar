@@ -1,16 +1,15 @@
 import React, { ReactNode } from "react";
 import Layout from "@/components/Layout";
+import SquaresGrid from "@/domains/events/features/calendar/components/SquaresGrid";
 
 interface CalendarPageProps {
-  children: ReactNode[];
+  periods: number;
 }
 
-const CalendarPage: React.FC<CalendarPageProps> = ({ children }) => {
+const CalendarPage: React.FC<CalendarPageProps> = ({ periods }) => {
   return (
     <Layout>
-      <div className="h-screen w-screen p-4 flex flex-wrap overflow-hidden bg-gray-200">
-        {children}
-      </div>
+      <SquaresGrid count={periods} />
     </Layout>
   );
 };
