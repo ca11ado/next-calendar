@@ -1,8 +1,11 @@
 export interface Event {
   id: string;
-  date: string;
   name: string;
   description: string;
+  start_at: string;
+  end_at: string;
+  type: string;
+  tags: string[] | null;
 }
 
 export interface EventData {

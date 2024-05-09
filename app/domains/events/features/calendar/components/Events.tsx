@@ -1,30 +1,23 @@
 import React from "react";
 import { Event } from "@/domains/events/types/Event";
-import EventComponent from "@/domains/events/features/calendar/components/Event";
 
-interface EventProps {
+const getDate = (date: string) => new Date(date).toLocaleDateString();
+
+type Props = {
   events: Event[];
-}
+};
 
-const Events: React.FC<EventProps> = ({ events }) => {
-  const usedColors: string[] = [];
-
+const Events: React.FC<Props> = (props) => {
+  const { events } = props;
   return (
-    <>
-      {events.map((event) => {
-        let color = getRandomColor();
-        while (usedColors.includes(color)) {
-          color = getRandomColor();
-        }
-        usedColors.push(color);
-
-        return (
-          <EventComponent key={event.id} color={color}>
-            {event.name}
-          </EventComponent>
-        );
-      })}
-    </>
+    <div>
+      {events.map((event) => (
+        <div>
+          {getDate(event.start_at)} - {getDate(event.end_at)} --- {event.name}{" "}
+          --- {event.type}
+        </div>
+      ))}
+    </div>
   );
 };
 
