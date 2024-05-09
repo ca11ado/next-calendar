@@ -4,21 +4,26 @@ import { addItems } from "@/domains/events/features/dashboard/api/events";
 export const useEventForm = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [date, setDate] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [type, setType] = useState("");
+  const [tags, setTags] = useState([""]);
   const [time, setTime] = useState("");
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     // Проверка, что данные не пустые
-    if (!name || !description || !date || !time) {
+    if (!name || !description || !startDate || !endDate || !time) {
       alert("Please enter name, description, date, and time");
       return;
     }
 
     // Отправка данных на сервер
     try {
-      const response = await addItems([{ name, description, date }]);
+      const response = await addItems([
+        { name, description, start_at: startDate, end_at: endDate, tags, type },
+      ]);
 
       if (!response?.ok) {
         throw new Error("Failed to add event");
@@ -27,7 +32,8 @@ export const useEventForm = () => {
       // Очистка полей формы после успешной отправки
       setName("");
       setDescription("");
-      setDate("");
+      setStartDate("");
+      setEndDate("");
       setTime("");
       alert("Event added successfully");
     } catch (error) {
@@ -41,8 +47,14 @@ export const useEventForm = () => {
     setName,
     description,
     setDescription,
-    date,
-    setDate,
+    startDate,
+    setStartDate,
+    endDate,
+    setEndDate,
+    type,
+    setType,
+    tags,
+    setTags,
     time,
     setTime,
     handleSubmit,

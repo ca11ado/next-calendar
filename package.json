@@ -6,8 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint:tsc": "tsc --noEmit true",
-    "lint": "next lint"
+    "check:types": "tsc --noEmit true",
+    "check:lint": "next lint"
   },
   "dependencies": {
     "@types/lodash": "4.14.194",

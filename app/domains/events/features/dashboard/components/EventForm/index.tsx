@@ -8,8 +8,6 @@ const EventForm: React.FC = () => {
     setName,
     description,
     setDescription,
-    date,
-    setDate,
     time,
     setTime,
     handleSubmit,
@@ -41,18 +39,6 @@ const EventForm: React.FC = () => {
         ></textarea>
       </div>
       <div className="flex mb-4">
-        <div className="w-1/2 mr-2">
-          <label htmlFor="date" className="block mb-2">
-            Date:
-          </label>
-          <input
-            type="date"
-            id="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            className="w-full border border-gray-300 rounded px-4 py-2"
-          />
-        </div>
         <div className="w-1/2 ml-2">
           <label htmlFor="time" className="block mb-2">
             Time:
