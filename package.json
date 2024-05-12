@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "check:types": "tsc --noEmit true",
-    "check:lint": "next lint"
+    "check:lint": "next lint",
+    "test": "vitest",
+    "test:watch": "vitest watch"
   },
   "dependencies": {
     "@types/lodash": "4.14.194",
@@ -36,6 +38,7 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
-    "vercel": "^29.3.6"
+    "vercel": "^29.3.6",
+    "vitest": "1.6.0"
   }
 }
