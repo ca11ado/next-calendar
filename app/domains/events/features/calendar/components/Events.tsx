@@ -10,13 +10,15 @@ type Props = {
 const Events: React.FC<Props> = (props) => {
   const { events } = props;
   return (
-    <div>
-      {events.map((event) => (
-        <div>
-          {getDate(event.start_at)} - {getDate(event.end_at)} --- {event.name}{" "}
-          --- {event.type}
-        </div>
-      ))}
+    <div className="bg-white shadow-md rounded-lg p-4 max-w-sm">
+      <ul className="list-none space-y-2">
+        {events.map((event) => (
+          <li className="border-b border-gray-200 pb-2 mb-2">
+            {getDate(event.start_at)} - {getDate(event.end_at)} -- {event.name}{" "}
+            {event.type}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
