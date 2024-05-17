@@ -9,7 +9,7 @@ export const getDateBySqueryId = (
     throw new Error("Id is not valid");
   }
   const add = (id - 1) * (daysRatio + 1);
-  const start = id === 1 ? startDate : addDays(startDate, add);
+  const start = addDays(startDate, add);
   return {
     startDate: start,
     endDate: addDays(start, daysRatio),
