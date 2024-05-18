@@ -23,7 +23,7 @@ function getRandomColor() {
   };
 }
 
-export const getColorByType = (
+export const getColorsByType = (
   events: Event[]
 ): Record<Event["type"], string> => {
   const getColor = getRandomColor();

@@ -4,8 +4,8 @@ export interface Event {
   description: string;
   start_at: string;
   end_at: string;
-  type: string;
-  tags: string[] | null;
+  type: string; // TODO: add union
+  tags: string[] | null; // TODO: add uninon for all known tags
 }
 
 export interface EventData {

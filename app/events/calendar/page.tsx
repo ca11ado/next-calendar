@@ -13,8 +13,11 @@ export default async function Calendar() {
     const lifeLength = 70; // years
 
     const periods = lifeLength * shownTimePeriod;
+    const rateInDays = 7;
 
-    return <CalendarPage periods={periods} events={events} />;
+    return (
+      <CalendarPage periods={periods} events={events} rateInDays={rateInDays} />
+    );
   } catch (e) {
     console.log("Error fetch events data:", e);
     return <div>Error</div>;

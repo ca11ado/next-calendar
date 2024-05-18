@@ -1,19 +1,31 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
+import { Event } from "@/domains/events/types/Event";
+import { getColorsByType } from "@/domains/events/utils/getColorByType";
 import styles from "./SquaresGrid.module.css";
 import { calculateSquareSize } from "@/domains/events/utils/calculateSquareSize";
+import { isEventBelongsToPeriod } from "@/domains/events/utils/events";
+import { getDateBySqueryId } from "@/domains/events/utils/getDateBySqueryId";
 
 interface SquaresGridProps {
   count: number;
+  startCalendarDate: Date;
+  events: Event[];
+  colorsByType: ReturnType<typeof getColorsByType>;
   width?: string;
   height?: string;
 }
 
-const SquaresGrid: React.FC<SquaresGridProps> = ({
-  count,
-  width = "400px",
-  height = "600px",
-}) => {
+const SquaresGrid: React.FC<SquaresGridProps> = (props) => {
+  const daysRatio = 7; // TODO:
+  const {
+    count,
+    width = "400px",
+    height = "600px",
+    events,
+    startCalendarDate,
+    colorsByType,
+  } = props;
   const [gridSize, setGridSize] = useState<number>(0);
   const gridRef = useRef<HTMLDivElement>(null);
 
@@ -33,6 +45,19 @@ const SquaresGrid: React.FC<SquaresGridProps> = ({
     return () => window.removeEventListener("resize", updateGridSize);
   }, [count]);
 
+  const getSquadColor = (id: number) => {
+    const per = getDateBySqueryId(id, startCalendarDate, daysRatio);
+    const event = events.find((e) =>
+      isEventBelongsToPeriod(e, per.startDate, per.endDate)
+    );
+
+    if (!event) {
+      return "";
+    }
+
+    return colorsByType[event.type];
+  };
+
   return (
     <div
       ref={gridRef}
@@ -45,7 +70,11 @@ const SquaresGrid: React.FC<SquaresGridProps> = ({
       }}
     >
       {Array.from({ length: count }, (_, index) => (
-        <div key={index} className={styles.square}></div>
+        <div
+          key={index}
+          className={styles.square}
+          style={{ backgroundColor: getSquadColor(index + 1) }}
+        ></div>
       ))}
     </div>
   );
