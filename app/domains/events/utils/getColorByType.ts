@@ -2,17 +2,16 @@ import { Event } from "../types/Event";
 
 function getRandomColor() {
   const colors = [
-    "#FFC0CB",
-    "#FFD700",
-    "#90EE90",
-    "#87CEEB",
-    "#BA55D3",
-    "#07988c",
-    "#9c0025",
-    "#77011d",
-    "#d209ed",
-    "#52055c",
-    "#e308ff",
+    "#6B8E23", // Olive Drab
+    "#4682B4", // Steel Blue
+    "#D2691E", // Chocolate
+    "#8FBC8F", // Dark Sea Green
+    "#CD5C5C", // Indian Red
+    "#20B2AA", // Light Sea Green
+    "#7B68EE", // Medium Slate Blue
+    "#DB7093", // Pale Violet Red
+    "#B8860B", // Dark Goldenrod
+    "#708090", // Slate Gray
   ];
   return () => {
     if (!colors.length) {
