@@ -12,20 +12,14 @@ interface SquaresGridProps {
   startCalendarDate: Date;
   events: Event[];
   colorsByType: ReturnType<typeof getColorsByType>;
-  width?: string;
-  height?: string;
+  width: string;
+  height: string;
 }
 
 const SquaresGrid: React.FC<SquaresGridProps> = (props) => {
   const daysRatio = 7; // TODO:
-  const {
-    count,
-    width = "400px",
-    height = "600px",
-    events,
-    startCalendarDate,
-    colorsByType,
-  } = props;
+  const { count, width, height, events, startCalendarDate, colorsByType } =
+    props;
   const [gridSize, setGridSize] = useState<number>(0);
   const gridRef = useRef<HTMLDivElement>(null);
 

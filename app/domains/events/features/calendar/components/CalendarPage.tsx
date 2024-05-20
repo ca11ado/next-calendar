@@ -9,7 +9,6 @@ import { getColorsByType } from "@/domains/events/utils/getColorByType";
 interface CalendarPageProps {
   periods: number;
   events: Event[];
-  rateInDays: number;
 }
 
 const CalendarPage: React.FC<CalendarPageProps> = (props) => {
@@ -27,6 +26,8 @@ const CalendarPage: React.FC<CalendarPageProps> = (props) => {
           ))}
         </div>
         <SquaresGrid
+          width="600px"
+          height="800px"
           count={periods}
           startCalendarDate={new Date(firstEvent.start_at)}
           events={events}

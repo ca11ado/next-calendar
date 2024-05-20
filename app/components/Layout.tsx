@@ -18,7 +18,7 @@ export const LayoutTwoColumns: React.FC<LayoutTwoColumnsProps> = ({
   children,
 }) => {
   return (
-    <div className="container mx-auto py-8 grid grid-cols-2 gap-4">
+    <div className="container mx-auto py-8 flex justify-between gap-4">
       {children[0]}
       {children[1]}
     </div>

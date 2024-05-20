@@ -7,17 +7,11 @@ export default async function Calendar() {
   try {
     const events = await getEvents();
     const month = 12;
-    const year = 1;
+    const week = 4;
+    const lifeLengthInYears = 70;
+    const scale = lifeLengthInYears * month * week;
 
-    const shownTimePeriod = year * month;
-    const lifeLength = 70; // years
-
-    const periods = lifeLength * shownTimePeriod;
-    const rateInDays = 7;
-
-    return (
-      <CalendarPage periods={periods} events={events} rateInDays={rateInDays} />
-    );
+    return <CalendarPage periods={scale} events={events} />;
   } catch (e) {
     console.log("Error fetch events data:", e);
     return <div>Error</div>;
