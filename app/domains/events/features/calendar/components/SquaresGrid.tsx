@@ -6,6 +6,7 @@ import styles from "./SquaresGrid.module.css";
 import { calculateSquareSize } from "@/domains/events/utils/calculateSquareSize";
 import { isEventBelongsToPeriod } from "@/domains/events/utils/events";
 import { getDateBySqueryId } from "@/domains/events/utils/getDateBySqueryId";
+import Square from "./Squary";
 
 interface SquaresGridProps {
   count: number;
@@ -17,7 +18,6 @@ interface SquaresGridProps {
 }
 
 const SquaresGrid: React.FC<SquaresGridProps> = (props) => {
-  const daysRatio = 7; // TODO:
   const { count, width, height, events, startCalendarDate, colorsByType } =
     props;
   const [gridSize, setGridSize] = useState<number>(0);
@@ -39,19 +39,6 @@ const SquaresGrid: React.FC<SquaresGridProps> = (props) => {
     return () => window.removeEventListener("resize", updateGridSize);
   }, [count]);
 
-  const getSquadColor = (id: number) => {
-    const per = getDateBySqueryId(id, startCalendarDate, daysRatio);
-    const event = events.find((e) =>
-      isEventBelongsToPeriod(e, per.startDate, per.endDate)
-    );
-
-    if (!event) {
-      return "";
-    }
-
-    return colorsByType[event.type];
-  };
-
   return (
     <div
       ref={gridRef}
@@ -64,11 +51,12 @@ const SquaresGrid: React.FC<SquaresGridProps> = (props) => {
       }}
     >
       {Array.from({ length: count }, (_, index) => (
-        <div
-          key={index}
-          className={styles.square}
-          style={{ backgroundColor: getSquadColor(index + 1) }}
-        ></div>
+        <Square
+          index={index}
+          startCalendarDate={startCalendarDate}
+          events={events}
+          colorsByType={colorsByType}
+        />
       ))}
     </div>
   );
