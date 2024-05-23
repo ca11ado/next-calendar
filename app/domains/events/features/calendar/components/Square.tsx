@@ -26,7 +26,7 @@ interface Square {
   events: Event[];
   colorsByType: ReturnType<typeof getColorsByType>;
   activeType: string | null;
-  onClick: (event: Event) => void;
+  onClick: (event: Event | null) => void;
 }
 
 const Square: React.FC<Square> = (props) => {
@@ -50,7 +50,7 @@ const Square: React.FC<Square> = (props) => {
   );
 
   const color = event ? colorsByType[event.type] : "";
-  const onEventClick = event ? () => onClick(event) : () => undefined;
+  const onEventClick = event ? () => onClick(event) : () => onClick(null);
   const style = { backgroundColor: color || defaultBackgroundColor };
 
   return (

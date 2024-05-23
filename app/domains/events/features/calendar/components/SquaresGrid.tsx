@@ -22,8 +22,12 @@ const SquaresGrid: React.FC<SquaresGridProps> = (props) => {
   const [gridSize, setGridSize] = useState<number>(0);
   const gridRef = useRef<HTMLDivElement>(null);
 
-  const onSquadeClick = (event: Event) => {
-    setActiveType(event.type);
+  const onSquadeClick = (event: Event | null) => {
+    if (event === null || event.type === activeType) {
+      setActiveType(null);
+    } else {
+      setActiveType(event.type);
+    }
   };
 
   useEffect(() => {
