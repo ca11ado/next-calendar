@@ -25,7 +25,7 @@ interface Square {
   startCalendarDate: Date;
   events: Event[];
   colorsByType: ReturnType<typeof getColorsByType>;
-  activeType: string | null;
+  activeEvent: Event | null;
   onClick: (event: Event | null) => void;
 }
 
@@ -36,7 +36,7 @@ const Square: React.FC<Square> = (props) => {
     events,
     startCalendarDate,
     colorsByType,
-    activeType,
+    activeEvent,
     onClick,
   } = props;
 
@@ -58,7 +58,8 @@ const Square: React.FC<Square> = (props) => {
       onClick={onEventClick}
       key={index}
       className={
-        (styles.square, activeType === event?.type ? styles.squareActive : "")
+        (styles.square,
+        activeEvent?.type === event?.type ? styles.squareActive : "")
       }
       style={style}
     ></div>

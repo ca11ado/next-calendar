@@ -5,6 +5,7 @@ import { getColorsByType } from "@/domains/events/utils/getColorByType";
 import styles from "./SquaresGrid.module.css";
 import { calculateSquareSize } from "@/domains/events/utils/calculateSquareSize";
 import Square from "./Square";
+import { useEvents } from "./hooks/useEvents";
 
 interface SquaresGridProps {
   count: number;
@@ -16,17 +17,23 @@ interface SquaresGridProps {
 }
 
 const SquaresGrid: React.FC<SquaresGridProps> = (props) => {
-  const { count, width, height, events, startCalendarDate, colorsByType } =
-    props;
-  const [activeType, setActiveType] = useState<string | null>(null);
+  const {
+    count,
+    width,
+    height,
+    events: ssrEvents,
+    startCalendarDate,
+    colorsByType,
+  } = props;
   const [gridSize, setGridSize] = useState<number>(0);
   const gridRef = useRef<HTMLDivElement>(null);
+  const { events, activeEvent, setActiveEvent } = useEvents(ssrEvents);
 
   const onSquadeClick = (event: Event | null) => {
-    if (event === null || event.type === activeType) {
-      setActiveType(null);
+    if (event === null || event.type === activeEvent?.type) {
+      setActiveEvent(null);
     } else {
-      setActiveType(event.type);
+      setActiveEvent(event);
     }
   };
 
@@ -64,7 +71,7 @@ const SquaresGrid: React.FC<SquaresGridProps> = (props) => {
           startCalendarDate={startCalendarDate}
           events={events}
           colorsByType={colorsByType}
-          activeType={activeType}
+          activeEvent={activeEvent}
           onClick={onSquadeClick}
         />
       ))}
