@@ -16,6 +16,7 @@ const Events: React.FC<Props> = (props) => {
       <ul className="list-none space-y-2">
         {events.map((event) => (
           <li
+            key={`${event.start_at}-${event.name}`}
             className="border-b border-gray-200 pb-2 mb-2"
             style={{ backgroundColor: colorsByType[event.type] }}
           >
