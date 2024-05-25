@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Event } from "@/domains/events/types/Event";
-import { getColorsByType } from "@/domains/events/utils/getColorByType";
+import { getColorByType } from "@/domains/events/utils/getColorByType";
 import styles from "./Square.module.css";
 import { isEventBelongsToPeriod } from "@/domains/events/utils/events";
 import { getDateBySqueryId } from "@/domains/events/utils/getDateBySqueryId";
@@ -24,21 +24,13 @@ interface Square {
   index: number;
   startCalendarDate: Date;
   events: Event[];
-  colorsByType: ReturnType<typeof getColorsByType>;
   activeEvent: Event | null;
   onClick: (event: Event | null) => void;
 }
 
 const Square: React.FC<Square> = (props) => {
   const daysRatio = 7; // TODO:
-  const {
-    index,
-    events,
-    startCalendarDate,
-    colorsByType,
-    activeEvent,
-    onClick,
-  } = props;
+  const { index, events, startCalendarDate, activeEvent, onClick } = props;
 
   const defaultBackgroundColor = "#fff";
 
@@ -49,7 +41,7 @@ const Square: React.FC<Square> = (props) => {
     daysRatio
   );
 
-  const color = event ? colorsByType[event.type] : "";
+  const color = event ? getColorByType(event.type) : "";
   const onEventClick = event ? () => onClick(event) : () => onClick(null);
   const style = { backgroundColor: color || defaultBackgroundColor };
 
@@ -59,7 +51,9 @@ const Square: React.FC<Square> = (props) => {
       key={index}
       className={
         (styles.square,
-        activeEvent?.type === event?.type ? styles.squareActive : "")
+        activeEvent?.type && activeEvent?.type === event?.type
+          ? styles.squareActive
+          : "")
       }
       style={style}
     ></div>

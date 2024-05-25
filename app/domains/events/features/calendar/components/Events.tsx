@@ -1,16 +1,15 @@
 import React from "react";
 import { Event } from "@/domains/events/types/Event";
-import { getColorsByType } from "@/domains/events/utils/getColorByType";
+import { getColorByType } from "@/domains/events/utils/getColorByType";
 
 const getDate = (date: string) => new Date(date).toLocaleDateString();
 
 type Props = {
   events: Event[];
-  colorsByType: ReturnType<typeof getColorsByType>;
 };
 
 const Events: React.FC<Props> = (props) => {
-  const { events, colorsByType } = props;
+  const { events } = props;
   return (
     <div className="bg-white shadow-md rounded-lg p-4 max-w-sm">
       <ul className="list-none space-y-2">
@@ -18,7 +17,7 @@ const Events: React.FC<Props> = (props) => {
           <li
             key={`${event.start_at}-${event.name}`}
             className="border-b border-gray-200 pb-2 mb-2"
-            style={{ backgroundColor: colorsByType[event.type] }}
+            style={{ backgroundColor: getColorByType(event.type) }}
           >
             {getDate(event.start_at)} - {getDate(event.end_at)} -- {event.name}{" "}
             {event.type}

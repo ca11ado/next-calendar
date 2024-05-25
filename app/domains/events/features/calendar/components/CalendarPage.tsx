@@ -1,10 +1,12 @@
+"use client";
 import React from "react";
 import { LayoutTwoColumns } from "@/components/Layout";
 import SquaresGrid from "@/domains/events/features/calendar/components/SquaresGrid";
 import { Event } from "@/domains/events/types/Event";
 import Events from "./Events";
 import { getFirstEvent } from "@/domains/events/utils/events";
-import { getColorsByType } from "@/domains/events/utils/getColorByType";
+import { useEvents } from "./hooks/useEvents";
+import ColorsAgenda from "./ColorsAgenda";
 
 interface CalendarPageProps {
   periods: number;
@@ -12,29 +14,25 @@ interface CalendarPageProps {
 }
 
 const CalendarPage: React.FC<CalendarPageProps> = (props) => {
-  const { periods, events } = props;
+  const { periods, events: ssrEvents } = props;
+  const { events, activeEvent, setActiveEvent } = useEvents(ssrEvents);
   const firstEvent = getFirstEvent(events);
-  const colorsByType = getColorsByType(events);
+
   return (
     <LayoutTwoColumns>
       <div>
-        <div style={{ marginBottom: "20px" }}>
-          {Object.keys(colorsByType).map((k) => (
-            <div style={{ backgroundColor: colorsByType[k] }}>
-              {k}: {colorsByType[k]};
-            </div>
-          ))}
-        </div>
+        <ColorsAgenda events={events} />
         <SquaresGrid
           width="600px"
           height="800px"
           count={periods}
           startCalendarDate={new Date(firstEvent.start_at)}
           events={events}
-          colorsByType={colorsByType}
+          activeEvent={activeEvent}
+          setActiveEvent={setActiveEvent}
         />
       </div>
-      <Events events={events} colorsByType={colorsByType} />
+      <Events events={events} />
     </LayoutTwoColumns>
   );
 };
