@@ -32,7 +32,11 @@ const CalendarPage: React.FC<CalendarPageProps> = (props) => {
           setActiveEvent={setActiveEvent}
         />
       </div>
-      <Events events={events} />
+      <Events
+        events={events}
+        activeEvent={activeEvent}
+        setActiveEvent={setActiveEvent}
+      />
     </LayoutTwoColumns>
   );
 };

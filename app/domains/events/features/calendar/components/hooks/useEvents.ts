@@ -9,6 +9,6 @@ export const useEvents = (initialEvents: Event[]) => {
     events,
     setEvents,
     activeEvent,
-    setActiveEvent,
+    setActiveEvent: setActiveEvent,
   };
 };
