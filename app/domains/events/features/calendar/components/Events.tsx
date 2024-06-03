@@ -6,7 +6,7 @@ import { isCurrentEvent } from "@/domains/events/utils/events";
 type Props = {
   events: Event[];
   activeEvent: Event | null;
-  setActiveEvent: (event: Event) => void;
+  setActiveEvent: (event: Event | null) => void;
 };
 
 const Events: React.FC<Props> = (props) => {
@@ -24,7 +24,7 @@ const Events: React.FC<Props> = (props) => {
             key={`${event.start_at}-${event.name}`}
             className="border-b border-gray-200 p-1 mb-2"
             style={style(event)}
-            onClick={() => setActiveEvent(event)}
+            onClick={() => setActiveEvent(activeEvent ? null : event)}
           >
             {event.name} {event.type}
           </li>
