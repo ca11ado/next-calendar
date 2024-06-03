@@ -19,8 +19,7 @@ const Events: React.FC<Props> = (props) => {
             className="border-b border-gray-200 pb-2 mb-2"
             style={{ backgroundColor: getColorByType(event.type) }}
           >
-            {getDate(event.start_at)} - {getDate(event.end_at)} -- {event.name}{" "}
-            {event.type}
+            {event.name} {event.type}
           </li>
         ))}
       </ul>
