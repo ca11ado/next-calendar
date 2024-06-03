@@ -1,6 +1,7 @@
 import React from "react";
 import { Event } from "@/domains/events/types/Event";
 import { getColorByType } from "@/domains/events/utils/getColorByType";
+import { isCurrentEvent } from "@/domains/events/utils/events";
 
 type Props = {
   events: Event[];
@@ -13,8 +14,7 @@ const Events: React.FC<Props> = (props) => {
   const style = (event: Event) => ({
     backgroundColor: getColorByType(event.type),
     BoxSizing: "border-box",
-    // TODO: not all events
-    ...(activeEvent?.type === event.type && { border: "2px solid black" }),
+    ...(isCurrentEvent(event, activeEvent) && { border: "2px solid black" }),
   });
   return (
     <div className="bg-white shadow-md rounded-lg p-1 max-w-sm">

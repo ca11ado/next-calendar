@@ -3,7 +3,10 @@ import React from "react";
 import { Event } from "@/domains/events/types/Event";
 import { getColorByType } from "@/domains/events/utils/getColorByType";
 import styles from "./Square.module.css";
-import { isEventBelongsToPeriod } from "@/domains/events/utils/events";
+import {
+  isCurrentEvent,
+  isEventBelongsToPeriod,
+} from "@/domains/events/utils/events";
 import { getDateBySqueryId } from "@/domains/events/utils/getDateBySqueryId";
 
 const getCurrentEvent = (
@@ -51,9 +54,7 @@ const Square: React.FC<Square> = (props) => {
       key={index}
       className={
         (styles.square,
-        activeEvent?.type && activeEvent?.type === event?.type
-          ? styles.squareActive
-          : "")
+        isCurrentEvent(event, activeEvent) ? styles.squareActive : "")
       }
       style={style}
     ></div>

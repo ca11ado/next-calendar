@@ -1,5 +1,15 @@
 import { Event } from "@/domains/events/types/Event";
 
+export const isCurrentEvent = (
+  event: Event | null,
+  currentEvent: Event | null
+) =>
+  event &&
+  currentEvent &&
+  event.type === currentEvent.type &&
+  event.start_at === currentEvent.start_at &&
+  event.end_at === currentEvent.end_at;
+
 export const getFirstEvent = (events: Event[]) => {
   if (events.length === 0) {
     throw new Error("Events array is empty");
