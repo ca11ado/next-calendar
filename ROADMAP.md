@@ -1,4 +1,4 @@
-- [ ] Update UI for events:
+- [x] Update UI for events:
 
   - show only event title
   - connect event with calendar
