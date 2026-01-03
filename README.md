@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Календарь жизни
 
-## Getting Started
+Визуализация периодов жизни на вертикальной временной шкале. 70 лет на одном экране.
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-16-black) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue) ![Tailwind](https://img.shields.io/badge/Tailwind-3-38B2AC)
+
+## Фичи
+
+- Вертикальный таймлайн с адаптивным размещением событий
+- Масштабирование календаря (50%/80%/100%/150%/200%)
+- Гибкая группировка: по названию, категории или обоим полям
+- Автоматическое размещение перекрывающихся событий в несколько рядов
+- CRUD для событий, экспорт/импорт JSON
+- 5 категорий: Образование, Работа, Путешествия, Личное, Другое
+- LocalStorage
+
+## Sidebar
+
+**ДЕЙСТВИЯ**
+
+- События: добавить, экспорт, импорт
+- Режимы: fullscreen, цвета
+
+**НАСТРОЙКИ**
+
+- Группировка: название, категория
+- Размер: 1/2, 0.8, 1, x1.5, x2
+
+**ИНФОРМАЦИЯ**: текущий год, календарь (70 лет)
+
+**ЛЕГЕНДА**: список событий с цветами
+
+## Установка
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+npm install
+npm run dev        # http://localhost:3000
+npm run validate   # проверка перед коммитом
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Технологии
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Next.js 16 (App Router) · TypeScript · Tailwind CSS · date-fns · LocalStorage
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Архитектура
 
-## Learn More
+```
+src/
+├── app/            # Страницы (page.tsx, layout.tsx)
+├── components/
+│   ├── calendar/   # Timeline, TimeGrid, EventBar
+│   ├── events/     # CRUD компоненты
+│   └── ui/         # Button, Modal, Input, Select
+└── lib/
+    ├── types.ts
+    ├── constants.ts
+    ├── hooks/      # useEvents, useLocalStorage, useZoom
+    └── utils/      # layoutEngine, positionCalculator, export/import
+```
 
-To learn more about Next.js, take a look at the following resources:
+**Ключевые алгоритмы:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `layoutEngine.ts` — жадный алгоритм размещения событий без перекрытий
+- `positionCalculator.ts` — расчёт позиций с учётом масштаба и viewport
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Конфигурация
 
-## Deploy on Vercel
+`src/lib/constants.ts`:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `BIRTH_DATE` = 25 марта 1989
+- `LIFE_SPAN_YEARS` = 70
+- `DEFAULT_ZOOM_SCALE` = 100
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Разработка
 
-Comment test
+Строгий TypeScript без `as`, ESLint max-warnings 0, Prettier. Всегда `npm run validate` перед коммитом.
+
+---
+
+MIT · Проект создан с помощью Claude Code
